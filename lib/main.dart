@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.teal,
         appBar: AppBar(
           backgroundColor: Colors.blueGrey,
           title: const Text(
@@ -35,33 +36,52 @@ class Moha extends StatefulWidget {
 class _MohaState extends State<Moha> {
   int moha = 1;
   int you = 1;
-  int somme = 0;
+
+  void random() {
+    setState(() {
+      you = Random().nextInt(6) + 1;
+      moha = Random().nextInt(6) + 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: TextButton(
-              onPressed: () {
-                setState(() {
-                  moha = Random().nextInt(6) + 1;
-                });
-              },
-              child: Image.asset('images/dice$moha.png'),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: TextButton(
+                  onPressed: () {
+                    setState(() {
+                      random();
+                    });
+                  },
+                  child: Image.asset('images/dice$moha.png'),
+                ),
+              ),
+              Expanded(
+                child: TextButton(
+                  onPressed: () {
+                    random();
+                  },
+                  child: Image.asset('images/dice$you.png'),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: TextButton(
-              onPressed: () {
-                setState(() {
-                  you = Random().nextInt(6) + 1;
-                });
-              },
-              child: Image.asset('images/dice$you.png'),
-            ),
-          ),
+          Column(
+            children: [
+              Text(
+                'presse the dice',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 45,
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
